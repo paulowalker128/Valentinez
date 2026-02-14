@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valentine 💘</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+      background: linear-gradient(to bottom, #ffb6c1, #fff);
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #d1005d;
+      margin: 0 20px 15px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #333;
+      margin: 0 20px 25px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+    }
+
+    #yes {
+      background: #ff2e7a;
+      color: white;
+    }
+
+    #no {
+      background: #444;
+      color: white;
+      position: absolute;
+    }
+
+    /* Hearts animation */
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(-110vh) scale(1.6);
+        opacity: 0;
+      }
+    }
+
+    /* Popup message */
+    #popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.55);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    #popupBox {
+      background: pink;
+      padding: 25px;
+      border-radius: 18px;
+      width: 85%;
+      max-width: 350px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+
+    #popupBox h2 {
+      color: #ff2e7a;
+      margin-bottom: 10px;
+    }
+
+    #popupBox p {
+      margin-bottom: 18px;
+    }
+
+    #closeBtn {
+      background: #ff2e7a;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 12px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Change her name here -->
+  <h1>Hey Franklin 💖</h1>
+  <p>Wishing you love ❤️ and happiness 🌈 today, and dats fr😌✨</p>
+  <h1>Will you be my Valentine? 💘</h1>
+
+  <div class="buttons">
+    <button id="yes">YES 💕</button>
+  </div>
+
+  <button id="no">NO 😭</button>
+
+  <!-- Music -->
+  <audio id="music" loop>
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Popup -->
+  <div id="popup">
+    <div id="popupBox">
+      <h2>Yayyyy!! 😍💘</h2>
+      <p>
+        I’m sorry for the lack of communication between us 😩💕  
+        You've always been on my mind and please don’t doubt us nor doubt my love for you ❤️
+        I'm truly and deeply sorry for everything and i want you to know that you mean a lot to me and I love you deeply 💝❤️
+        I Love You Very Much Lucy 😘💞
+      <button id="closeBtn">Aww 😭💕</button>
+    </div>
+  </div>
+
+  <script>
+    // Start music on first tap (phone autoplay restriction)
+    document.body.addEventListener("click", () => {
+      document.getElementById("music").play();
+    }, { once: true });
+
+    // YES popup
+    document.getElementById("yes").addEventListener("click", () => {
+      document.getElementById("popup").style.display = "flex";
+    });
+
+    document.getElementById("closeBtn").addEventListener("click", () => {
+      document.getElementById("popup").style.display = "none";
+    });
+
+    // NO button runs away
+    const noBtn = document.getElementById("no");
+
+    function moveNoButton() {
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 60);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+
+    noBtn.addEventListener("mouseover", moveNoButton);
+    noBtn.addEventListener("click", moveNoButton);
+    moveNoButton();
+
+    // Floating hearts
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (3 + Math.random() * 4) + "s";
+      heart.style.fontSize = (15 + Math.random() * 25) + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
+
+</body>
+</html>
